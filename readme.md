@@ -12,4 +12,4 @@ There are several open source attempts at comprehensive PE/COFF parsing librarie
 - [peparser](https://github.com/smarttechnologies/peparser)
 - [bearparser](https://github.com/hasherezade/bearparser)
 
-The goal for this project is to leverage the best parts of these other projects along with modern C++ 20 to create a new parsing and manipulation library. Both of those components are things I'm learning along the way, so contributions and code reviews are very welcome.
+The goal for this project is to leverage the best parts of these other projects along with modern C++ 20 to create a new parsing and manipulation library. Both of those components are things I'm learning along the way, so contributions, code reviews, and feature requests are very welcome.
