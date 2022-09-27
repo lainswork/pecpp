@@ -24,7 +24,7 @@ namespace pecpp
 	{
 		auto nth = get_nth(image);
 		auto opt = reinterpret_cast<image_opt_header*>(&nth->OptionalHeader);
-		if (opt->Magic != IMAGE_NT_OPTIONAL_HDR_MAGIC) throw Error::err_opt_magic_invalid;
+		// whats the worst that can happen? lol
 		return opt;
 	}
 

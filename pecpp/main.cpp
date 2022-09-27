@@ -46,20 +46,23 @@ namespace test
 			namespace fs = std::filesystem;
 			const fs::path sys32{ fs::path("C:/Windows/System32") };
 			std::vector<pecpp::Image> images;
+			int count = 0;
 			for (auto entry : fs::directory_iterator(sys32))
 			{
 				if (entry.is_regular_file())
 				{
 					auto extension = entry.path().extension().string();
-					if (extension.compare(".exe") != 0) continue;
+					if ((extension.compare(".dll") != 0)) continue;
 					std::string file_name = entry.path().string();
 					auto data = helpers::file_to_bytes(file_name);
 					try
 					{
 						pecpp::Image image(data);
+						count++;
+						std::cout << "Image created. Count: " << count << std::endl;
 						images.push_back(std::move(image));
 					}
-					catch (...)
+					catch (std::exception& e)
 					{
 						continue;
 					}
