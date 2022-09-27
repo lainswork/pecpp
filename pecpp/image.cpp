@@ -7,8 +7,7 @@ namespace pecpp
 	//
 	Image& Image::operator=(Image& other)
 	{
-		const std::lock_guard<std::mutex> lock_raw(raw_mtx_);
-		const std::lock_guard<std::mutex> lock_bak(bak_mtx_);
+		const std::lock_guard<std::mutex> lock(this_mtx_);
 		hdr_dos_ = other.get_dos();
 		hdr_nt_ = other.get_nth();
 		hdr_file_ = other.get_fh();
@@ -18,7 +17,7 @@ namespace pecpp
 		bak_ = this->bak_;
 		return *this;
 	}
-	
+
 	//
 	// Getters
 	//

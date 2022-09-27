@@ -62,7 +62,7 @@ namespace pecpp
 		auto sec = IMAGE_FIRST_SECTION(nth);
 		uint32_t i = 0;
 
-		while (i <= nth->FileHeader.NumberOfSections)
+		while (i < nth->FileHeader.NumberOfSections)
 		{
 			sec_hdrs.push_back(*sec);
 			sec = IMAGE_NEXT_SECTION(sec);
@@ -78,6 +78,7 @@ namespace pecpp
 		std::vector<std::vector<uint8_t>> secs;
 		for (auto sec_hdr : sec_hdrs)
 		{
+			// TODO Make sure that the read does not go out of bounds of the buffer
 			uint8_t* ptr = data.data() + sec_hdr.SizeOfRawData;
 			std::vector<uint8_t> sec(ptr, ptr + sec_hdr.SizeOfRawData);
 			secs.push_back(sec);

@@ -20,7 +20,7 @@ add_executable(main ${SOURCE_FILES} "main.cpp" "parser.hpp" "parser.cpp" "image.
 target_link_libraries(main lib-pecpp)
 
 # Add tests
-add_executable(cpp_test test.cpp "main.cpp" "parser.hpp" "parser.cpp" "image.hpp" "image.cpp" "error.hpp")
+add_executable(cpp_test main.cpp "main.cpp" "parser.hpp" "parser.cpp" "image.hpp" "image.cpp" "error.hpp")
 target_link_libraries(cpp_test lib-pecpp)
 
 enable_testing()

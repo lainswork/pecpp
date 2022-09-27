@@ -9,7 +9,7 @@ namespace pecpp
 	{
 	public:
 
-		Image(std::vector<uint8_t>& vec)
+		explicit Image(std::vector<uint8_t>& vec)
 			: raw_{ vec }
 			, bak_{ vec }
 			, hdr_dos_{ *Parser::get_dos(vec) }
@@ -20,6 +20,16 @@ namespace pecpp
 		{};
 
 		Image& operator=(Image& other);
+
+		Image(const Image&& other)
+			: raw_{ std::move(other.raw_) }
+			, bak_{ std::move(other.bak_) }
+			, hdr_dos_{ std::move(other.hdr_dos_) }
+			, hdr_nt_{ std::move(other.hdr_nt_) }
+			, hdr_file_{ std::move(other.hdr_file_) }
+			, hdr_opt_{ std::move(other.hdr_opt_) }
+			, secs_{ std::move(other.secs_) }
+			{};
 
 		image_dos_header get_dos() const;
 		image_nt_headers get_nth() const;
@@ -40,8 +50,6 @@ namespace pecpp
 		sec_map secs_;
 
 		mutable std::mutex this_mtx_;
-		std::mutex raw_mtx_;
-		std::mutex bak_mtx_;
 		std::vector<uint8_t> raw_;
 		std::vector<uint8_t> bak_;
 
