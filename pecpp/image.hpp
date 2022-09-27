@@ -8,7 +8,6 @@ namespace pecpp
 	class Image
 	{
 	public:
-
 		explicit Image(std::vector<uint8_t>& vec)
 			: raw_{ vec }
 			, bak_{ vec }
@@ -42,7 +41,6 @@ namespace pecpp
 
 		// setters
 		void set_sec_data(std::string& sec_name, std::vector<uint8_t> new_data);
-		void set_sec_hdr(std::string& sec_name, image_sec_header* new_hdr);
 		void new_sec(image_sec_header* new_hdr, std::vector<uint8_t>& new_data);
 
 		// file manipulation / flushing raw to Image

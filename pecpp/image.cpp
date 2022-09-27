@@ -83,19 +83,20 @@ namespace pecpp
 	void Image::set_sec_data(std::string& sec_name, std::vector<uint8_t> new_data)
 	{
 		const std::lock_guard<std::mutex> lock(this_mtx_);
-		// modify this->secs_[entry]
-	}
-
-	void Image::set_sec_hdr(std::string& sec_name, image_sec_header* new_hdr)
-	{
-		const std::lock_guard<std::mutex> lock(this_mtx_);
-		// modify this->secs_[entry]
+		for (auto pair : secs_)
+		{
+			if (!sec_name.compare((char*)pair.first.Name))
+			{
+				pair.second = new_data;
+			}
+		}
 	}
 
 	void Image::new_sec(image_sec_header* new_hdr, std::vector<uint8_t>& new_data)
 	{
 		const std::lock_guard<std::mutex> lock(this_mtx_);
-		//auto sec_hdr_ptr = Parser::get_shared_sec_hdrs_ptr()
+		auto new_section = std::make_pair(*new_hdr, new_data);
+		secs_.push_back(new_section);
 	}
 
 	//
