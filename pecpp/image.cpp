@@ -61,6 +61,7 @@ namespace pecpp
 		return this->secs_;
 	}
 
+
 	// TODO Debug this to see if its actually working
 	void Image::set_sec_data(std::string& sec_name, std::vector<uint8_t> new_data)
 	{
@@ -75,8 +76,13 @@ namespace pecpp
 				set_raw(hdr.PointerToRawData, new_data);
 			}
 		}
-		auto new_img = Image(raw_);
-		*this = new_img;
+	}
+
+	void Image::set_sec_hdr(std::string& sec_name, image_sec_header* new_hdr)
+	{	
+		if (new_hdr == nullptr) throw Error::err_invalid_memory;
+		Parser::set_sec_hdr(sec_name, new_hdr, raw_);		
+		refresh(raw_);
 	}
 
 	void Image::set_raw(uint32_t offset, std::vector<uint8_t> data)
@@ -90,5 +96,14 @@ namespace pecpp
 		{
 			raw_[offset] = byte;
 		}
+
+		refresh(raw_); // Does this work???
+	}
+
+	void Image::refresh(std::vector<uint8_t>& new_raw)
+	{
+		const std::lock_guard<std::mutex> lock(raw_mtx_);
+		auto new_img = Image(new_raw);
+		*this = new_img;
 	}
 }

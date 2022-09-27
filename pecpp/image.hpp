@@ -30,13 +30,7 @@ namespace pecpp
 		sec_map get_sec_map() const;
 
 		void set_sec_data(std::string& sec_name, std::vector<uint8_t> new_data);
-		void set_sec_hdr(std::string& sec_name, image_sec_header& new_hdr);
-
-		struct Error
-		{
-			inline static std::invalid_argument err_raw_assignment = std::invalid_argument("Assignment to raw PE data out of range");
-
-		};
+		void set_sec_hdr(std::string& sec_name, image_sec_header* new_hdr);
 
 	private:
 		image_dos_header hdr_dos_;
@@ -50,6 +44,7 @@ namespace pecpp
 		std::vector<uint8_t> raw_;
 		std::vector<uint8_t> bak_;
 
+		void refresh(std::vector<uint8_t>& new_raw);
 		void set_raw(uint32_t offset, std::vector<uint8_t> data);
 
 	};

@@ -12,6 +12,8 @@
 #include <map>
 #include <algorithm>
 
+#include "error.hpp"
+
 #define IMAGE_NEXT_SECTION( firstsection ) ((PIMAGE_SECTION_HEADER) \
     ((ULONG_PTR)(firstsection) + sizeof(IMAGE_SECTION_HEADER)))
 
