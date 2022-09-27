@@ -109,6 +109,42 @@ namespace pecpp
 		return map;
 	}
 
+	size_t Parser::get_sec_hdrs_size(std::vector<uint8_t>& image)
+	{
+		auto fh = get_fh(image);
+		return fh->NumberOfSections * sizeof(image_sec_header);
+	}
+
+	region_ptr Parser::get_shared_sec_hdrs_ptr(std::vector<uint8_t>& image)
+	{
+		auto nth = get_nth(image);
+		uint8_t* sec = (uint8_t*)IMAGE_FIRST_SECTION(nth);
+		auto ptr = std::make_shared<uint8_t*>(sec);
+		auto size = get_sec_hdrs_size(image);
+		auto pair = std::make_pair(ptr, size);
+		return pair;
+	}
+
+	region_ptr Parser::get_shared_sec_data_ptr(std::vector<uint8_t>& image)
+	{
+		auto sec_hdrs = get_sec_hdrs(image);
+		auto first_section_offset = sec_hdrs[0].PointerToRawData;
+		size_t total_section_data_size;
+
+		for (auto hdr : sec_hdrs)
+		{
+			total_section_data_size = total_section_data_size + hdr.SizeOfRawData;
+		}
+
+		if ((first_section_offset + total_section_data_size) > image.size())
+			throw Error::err_sec_out_of_range;
+
+		auto sec_data_ptr = sec_hdrs[0].PointerToRawData + image.data();
+		auto ptr = std::make_shared<uint8_t*>(sec_data_ptr);
+		auto pair = std::make_pair(ptr, total_section_data_size);
+		return pair;
+	}
+
 	//
 	// Setters
 	//

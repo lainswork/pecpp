@@ -11,6 +11,7 @@
 #include <mutex>
 #include <map>
 #include <algorithm>
+#include <memory>
 
 #include "error.hpp"
 
@@ -29,4 +30,5 @@ namespace pecpp
 	// pecpp special types
 	typedef std::pair<image_sec_header, std::vector<uint8_t>> sec_pair;
 	typedef std::vector<sec_pair> sec_map;
+	typedef std::pair<std::shared_ptr<uint8_t*>, size_t> region_ptr;
 }

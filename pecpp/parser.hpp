@@ -14,6 +14,11 @@ namespace pecpp
 		static std::vector<image_sec_header> get_sec_hdrs(std::vector<uint8_t>& image);
 		static std::vector<std::vector<uint8_t>>  get_secs(std::vector<uint8_t>& image);
 		static sec_map get_sec_map(std::vector<uint8_t>& image);
+		static size_t get_sec_hdrs_size(std::vector<uint8_t>& image);
+
+		static region_ptr get_shared_sec_hdrs_ptr(std::vector<uint8_t>& image);
+		static region_ptr get_shared_sec_data_ptr(std::vector<uint8_t>& image);
+
 
 		static void set_dos(image_dos_header* new_dos, std::vector<uint8_t>& image);
 		static void set_nth(image_nt_headers* new_nth, std::vector<uint8_t>& image);

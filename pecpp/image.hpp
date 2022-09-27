@@ -45,8 +45,10 @@ namespace pecpp
 		void set_sec_hdr(std::string& sec_name, image_sec_header* new_hdr);
 		void new_sec(image_sec_header* new_hdr, std::vector<uint8_t>& new_data);
 
-		// file manipulation
-		void flush(std::string& filepath);
+		// file manipulation / flushing raw to Image
+		void flush_raw_to_disk(std::string& filepath);
+		void serialize(); // regenerate raw_ based on Image members (oh god)
+
 
 	private:
 		image_dos_header hdr_dos_;

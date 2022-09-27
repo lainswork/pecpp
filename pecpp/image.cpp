@@ -106,6 +106,17 @@ namespace pecpp
 		refresh(raw_);
 	}
 
+	void Image::new_sec(image_sec_header* new_hdr, std::vector<uint8_t>& new_data)
+	{
+		const std::lock_guard<std::mutex> lock(this_mtx_);
+
+
+	}
+
+	//
+	// Private image utilities
+	//
+
 	void Image::set_raw(uint32_t offset, std::vector<uint8_t> data)
 	{
 		const std::lock_guard<std::mutex> lock(this_mtx_);
