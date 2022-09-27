@@ -80,37 +80,22 @@ namespace pecpp
 	// Setters
 	//
 
-	// TODO Debug this to see if its actually working
 	void Image::set_sec_data(std::string& sec_name, std::vector<uint8_t> new_data)
 	{
 		const std::lock_guard<std::mutex> lock(this_mtx_);
-
-		for (auto sec : this->secs_)
-		{
-			auto hdr = sec.first;
-			if (!sec_name.compare((char*)hdr.Name))
-			{
-				auto sec_data = sec.second;
-				// TODO resize raw at destination to allow for data
-				// requires fixup of size variables in section header, optional header
-				set_raw(hdr.PointerToRawData, new_data);
-			}
-		}
+		// modify this->secs_[entry]
 	}
 
 	void Image::set_sec_hdr(std::string& sec_name, image_sec_header* new_hdr)
 	{
 		const std::lock_guard<std::mutex> lock(this_mtx_);
-		if (new_hdr == nullptr) throw Error::err_invalid_memory;
-		Parser::set_sec_hdr(sec_name, new_hdr, raw_);		
-		refresh(raw_);
+		// modify this->secs_[entry]
 	}
 
 	void Image::new_sec(image_sec_header* new_hdr, std::vector<uint8_t>& new_data)
 	{
 		const std::lock_guard<std::mutex> lock(this_mtx_);
 		//auto sec_hdr_ptr = Parser::get_shared_sec_hdrs_ptr()
-
 	}
 
 	//

@@ -36,7 +36,7 @@ namespace pecpp
 	void Image::serialize()
 	{
 		const std::lock_guard<std::mutex> lock(this_mtx_);
-		std::vector<uint8_t> new_raw;
+		refresh(raw_);
 		
 		// get pointers to raw headers and sections.
 		// these will simply be overwritten wherever possible with
