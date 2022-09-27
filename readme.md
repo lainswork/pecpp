@@ -33,3 +33,5 @@ for (auto entry : fs::directory_iterator(sys32))
   }
 }
 ```
+
+On my machine, over 3000 `.dll`s are successfully parsed with no exceptions thrown.
