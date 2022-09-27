@@ -78,8 +78,10 @@ namespace pecpp
 		std::vector<std::vector<uint8_t>> secs;
 		for (auto sec_hdr : sec_hdrs)
 		{
-			// TODO Make sure that the read does not go out of bounds of the buffer
-			uint8_t* ptr = data.data() + sec_hdr.SizeOfRawData;
+			if (sec_hdr.PointerToRawData + sec_hdr.SizeOfRawData > data.size())
+				throw Error::err_sec_out_of_range;
+			uint8_t* ptr = data.data() + sec_hdr.PointerToRawData;
+
 			std::vector<uint8_t> sec(ptr, ptr + sec_hdr.SizeOfRawData);
 			secs.push_back(sec);
 		}
