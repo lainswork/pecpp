@@ -99,7 +99,9 @@ namespace pecpp
 
 		image_sec_header new_hdr = { 0 };
 
-		// Unsure about this bit
+		// Ultimately, we want some degree of indifference on the part of the serializer/image
+		// to the order of these sections, so that sections can me modified/inserted wherever and not break
+		// other portions of the executable. The below is and example of code that will have to change
 		auto new_section = std::make_pair(new_hdr, new_data);
 		auto va_last_sec_end = secs_[-1].first.VirtualAddress + secs_[-1].first.Misc.VirtualSize;
 		auto factor = va_last_sec_end / hdr_opt_.SectionAlignment;
@@ -113,7 +115,9 @@ namespace pecpp
 		secs_.push_back(new_section);
 
 		hdr_file_.NumberOfSections++;
-		hdr_opt_.SizeOfImage += new_data.size() + sizeof(image_sec_header);
+		factor = new_data.size() / hdr_opt_.SectionAlignment;
+		auto size_added = std::ceil(factor) * hdr_opt_.SectionAlignment;
+		hdr_opt_.SizeOfImage + size_added;
 	}
 
 	//
