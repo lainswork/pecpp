@@ -13,3 +13,23 @@ There are several open source attempts at comprehensive PE/COFF parsing librarie
 - [bearparser](https://github.com/hasherezade/bearparser)
 
 The goal for this project is to leverage the best parts of these other projects along with modern C++ 20 to create a new parsing and manipulation library. Both of those components are things I'm learning along the way, so contributions, code reviews, and feature requests are very welcome.
+
+## Metrics
+
+Pointing the parser / image wrapper at `C:\Windows\System32` makes for a decent pseudo-fuzz test:
+
+```
+for (auto entry : fs::directory_iterator(sys32))
+{
+  // get path, check extension, get vector of file bytes (omitted)
+  try
+  {
+    pecpp::Image image(data);
+    images.push_back(std::move(image));
+  }
+  catch (std::exception& e)
+  {
+    continue;
+  }
+}
+```
