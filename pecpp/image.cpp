@@ -14,7 +14,6 @@ namespace pecpp
 		hdr_opt_ = other.get_opt();
 		secs_ = other.get_sec_map();
 		raw_ = other.raw_;
-		bak_ = this->bak_;
 		return *this;
 	}
 
