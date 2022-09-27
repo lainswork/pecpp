@@ -39,6 +39,7 @@ namespace pecpp
 		image_file_header hdr_file_;
 		sec_map secs_;
 
+		mutable std::mutex this_mtx_;
 		std::mutex raw_mtx_;
 		std::mutex bak_mtx_;
 		std::vector<uint8_t> raw_;
@@ -46,6 +47,5 @@ namespace pecpp
 
 		void refresh(std::vector<uint8_t>& new_raw);
 		void set_raw(uint32_t offset, std::vector<uint8_t> data);
-
 	};
 }
