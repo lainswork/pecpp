@@ -92,11 +92,28 @@ namespace pecpp
 		}
 	}
 
-	void Image::new_sec(image_sec_header* new_hdr, std::vector<uint8_t>& new_data)
+	// TODO test this
+	void Image::new_sec(std::string& name, uint32_t characteristics, std::vector<uint8_t>& new_data)
 	{
 		const std::lock_guard<std::mutex> lock(this_mtx_);
-		auto new_section = std::make_pair(*new_hdr, new_data);
+
+		image_sec_header new_hdr = { 0 };
+
+		// Unsure about this bit
+		auto new_section = std::make_pair(new_hdr, new_data);
+		auto va_last_sec_end = secs_[-1].first.VirtualAddress + secs_[-1].first.Misc.VirtualSize;
+		auto factor = va_last_sec_end / hdr_opt_.SectionAlignment;
+		auto new_va = std::ceil(factor) * hdr_opt_.SectionAlignment;
+
+		std::copy(name.begin(), name.end(), new_hdr.Name);
+		new_hdr.VirtualAddress = new_va;
+		new_hdr.SizeOfRawData = new_data.size();
+		new_hdr.Characteristics = characteristics;	
+
 		secs_.push_back(new_section);
+
+		hdr_file_.NumberOfSections++;
+		hdr_opt_.SizeOfImage += new_data.size() + sizeof(image_sec_header);
 	}
 
 	//

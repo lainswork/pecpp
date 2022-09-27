@@ -12,6 +12,7 @@
 #include <map>
 #include <algorithm>
 #include <memory>
+#include <cmath>
 
 #include "error.hpp"
 

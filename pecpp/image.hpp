@@ -41,7 +41,7 @@ namespace pecpp
 
 		// setters
 		void set_sec_data(std::string& sec_name, std::vector<uint8_t> new_data);
-		void new_sec(image_sec_header* new_hdr, std::vector<uint8_t>& new_data);
+		void new_sec(std::string& name, uint32_t characteristics, std::vector<uint8_t>& new_data);
 
 		// file manipulation / flushing raw to Image
 		void flush_raw_to_disk(std::string& filepath);
