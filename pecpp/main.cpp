@@ -61,6 +61,14 @@ namespace test
 						count++;
 						std::cout << "Image created. Count: " << count << std::endl;
 						images.push_back(std::move(image));
+						if (count == 1)
+						{
+							image.serialize();
+							std::string out = "./tmp.dll";
+							image.flush_raw_to_disk(out);
+							auto new_data = helpers::file_to_bytes(out);
+							pecpp::Image new_image(new_data);
+						}
 					}
 					catch (std::exception& e)
 					{

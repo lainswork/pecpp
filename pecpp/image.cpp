@@ -134,15 +134,30 @@ namespace pecpp
 		for (auto byte : data)
 		{
 			raw_[offset] = byte;
+			offset++;
 		}
 
-		refresh(raw_); // Does this work???
+		auto other = std::move(Image(raw_));
+		*this = other;
+	}
+
+	void Image::set_raw(uint32_t offset, std::vector<uint8_t>& src, std::vector<uint8_t>& dst)
+	{
+		// TODO remove size limitations by dynamically expanding raw
+		if (dst.size() < src.size() + offset)
+			throw Error::err_raw_assignment;
+
+		for (auto byte : src)
+		{
+			dst[offset] = byte;
+			offset++;
+		}
 	}
 
 	void Image::refresh(std::vector<uint8_t>& new_raw)
 	{
 		const std::lock_guard<std::mutex> lock(this_mtx_);
-		auto new_img = Image(new_raw);
-		*this = new_img;
+		auto other = std::move(Image(new_raw));
+		*this = other;
 	}
 }

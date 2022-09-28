@@ -5,15 +5,14 @@ cmake_minimum_required (VERSION 3.8)
 
 project ("pecpp")
 
-#add_subdirectory(test)
-enable_testing()
-
+find_path(DTL_INCLUDE_DIRS "dtl/Diff.hpp")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS 1)
 
 # Add source to this project's executable.
 add_library (lib-pecpp SHARED "pecpp.cpp" "pecpp.hpp" "parser.hpp" "parser.cpp" "image.hpp" "image.cpp" "error.hpp" "flush.cpp")
+target_include_directories(lib-pecpp PRIVATE ${DTL_INCLUDE_DIRS})
 
 set(SOURCE_FILES pecpp.cpp)
 add_executable(main ${SOURCE_FILES} "main.cpp" "parser.hpp" "parser.cpp" "image.hpp" "image.cpp" "error.hpp" "flush.cpp")

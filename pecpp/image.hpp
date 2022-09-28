@@ -61,6 +61,7 @@ namespace pecpp
 
 		void refresh(std::vector<uint8_t>& new_raw);
 		void set_raw(uint32_t offset, std::vector<uint8_t> data);
+		void set_raw(uint32_t offset, std::vector<uint8_t>& src, std::vector<uint8_t>& dst);
 
 		void backup(std::string& filepath);
 	};

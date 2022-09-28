@@ -129,7 +129,7 @@ namespace pecpp
 	{
 		auto sec_hdrs = get_sec_hdrs(image);
 		auto first_section_offset = sec_hdrs[0].PointerToRawData;
-		size_t total_section_data_size;
+		size_t total_section_data_size = 0;
 
 		for (auto hdr : sec_hdrs)
 		{
@@ -144,6 +144,38 @@ namespace pecpp
 		auto pair = std::make_pair(ptr, total_section_data_size);
 		return pair;
 	}
+
+	size_t Parser::get_dos_offset(std::vector<uint8_t>& image)
+	{
+		auto dos = get_dos(image);
+		return reinterpret_cast<uint8_t*>(dos) - image.data();
+	}
+
+	size_t Parser::get_nth_offset(std::vector<uint8_t>& image)
+	{
+		auto nth = get_nth(image);
+		return reinterpret_cast<uint8_t*>(nth) - image.data();
+	}
+
+	size_t Parser::get_fh_offset(std::vector<uint8_t>& image)
+	{
+		auto fh = get_fh(image);
+		return reinterpret_cast<uint8_t*>(fh) - image.data();
+	}
+
+	size_t Parser::get_opt_offset(std::vector<uint8_t>& image)
+	{
+		auto opt = get_opt(image);
+		return reinterpret_cast<uint8_t*>(opt) - image.data();
+	}
+
+	size_t Parser::get_sec_hdrs_offset(std::vector<uint8_t>& image)
+	{
+		auto nth = get_nth(image);
+		auto sec = IMAGE_FIRST_SECTION(nth);
+		return reinterpret_cast<uint8_t*>(sec) - image.data();
+	}
+
 
 	//
 	// Setters
