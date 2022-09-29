@@ -81,54 +81,6 @@ namespace pecpp
 
 		this->raw_ = new_raw;
 		refresh(raw_);
-
-
-		//*dos = hdr_dos_;
-		//*nth = hdr_nt_;
-		//*fh = hdr_file_;
-		//*opt = hdr_opt_;
-
-		//// The section headers can change though (as can the sections themselves)
-		//auto sec_hdrs = Parser::get_shared_sec_hdrs_ptr(raw_);
-		//auto sec_data = Parser::get_shared_sec_data_ptr(raw_);
-
-		//size_t curr_raw_hdr_offset = *sec_hdrs.first.get() - raw_.data();
-
-		//for (auto sec_mapping : secs_)
-		//{
-		//	auto new_hdr = sec_mapping.first;
-		//	auto const new_hdr_ptr = reinterpret_cast<uint8_t*>(&new_hdr);
-		//	std::vector<uint8_t> new_hdr_vec(new_hdr_ptr, new_hdr_ptr + sizeof(new_hdr));
-
-		//	auto new_sec_vec = sec_mapping.second;
-		//	size_t curr_raw_sec_offset = new_hdr.PointerToRawData;
-
-		//	auto sec_it = raw_.begin() + curr_raw_hdr_offset; // need to check header as well
-		//	auto sec_end = raw_.begin() + raw_.size();
-		//	if (sec_it > sec_end)
-		//	{
-		//		raw_.resize(raw_.capacity() + new_sec_vec.size());
-		//	}
-
-		//	raw_.insert(raw_.begin() + curr_raw_hdr_offset, new_hdr_vec.begin(), new_hdr_vec.end());
-		//	raw_.insert(raw_.begin() + curr_raw_sec_offset, new_sec_vec.begin(), new_sec_vec.end()); // something is wrong here			
-
-		//	curr_raw_hdr_offset += sizeof(image_sec_header);
-		//}
 	}
 
-	//void Image::serialize2()
-	//{
-	//	const std::lock_guard<std::mutex> lock(this_mtx_);
-	//	auto dos = Parser::get_dos(raw_);
-	//	auto nth = Parser::get_nth(raw_);
-	//	auto fh = Parser::get_fh(raw_);
-	//	auto opt = Parser::get_opt(raw_);
-
-	//	// The section headers can change though (as can the sections themselves)
-	//	auto sec_hdrs = Parser::get_shared_sec_hdrs_ptr(raw_);
-	//	auto sec_data = Parser::get_shared_sec_data_ptr(raw_);
-	//	size_t curr_raw_hdr_offset = *sec_hdrs.first.get() - raw_.data();
-	//	size_t curr_raw_sec_offset = *sec_data.first.get() - raw_.data();
-	//}
 }
