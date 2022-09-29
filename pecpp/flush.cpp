@@ -46,7 +46,6 @@ namespace pecpp
 		auto fh_offset =  Parser::get_fh_offset(raw_);
 		auto opt_offset = Parser::get_opt_offset(raw_);
 		auto sec_hdrs_offset = Parser::get_sec_hdrs_offset(raw_);
-		auto sec_data_offset = sec_it;
 
 		// Would be useful to have class member byte reps of the headers
 		auto dos_ptr = reinterpret_cast<uint8_t*>(&hdr_dos_);
@@ -67,21 +66,21 @@ namespace pecpp
 
 		for (const auto hdr_sec_pair : this->secs_)
 		{
-			std::vector<uint8_t> new_sec_hdr(
-				reinterpret_cast<uint8_t>(&hdr_sec_pair.first),
-				reinterpret_cast<uint8_t>(&hdr_sec_pair.first) + sizeof(hdr_sec_pair.first)
-			);
+			auto hdr = hdr_sec_pair.first;
+			auto hdr_ptr = reinterpret_cast<uint8_t*>(&hdr);
+			auto sec = hdr_sec_pair.second;
 
-			std::vector<uint8_t> new_sec_data(
-				reinterpret_cast<uint8_t>(&hdr_sec_pair.second),
-				reinterpret_cast<uint8_t>(&hdr_sec_pair.second) + hdr_sec_pair.first.SizeOfRawData
-			);
 
-			auto sec_data_offset = hdr_sec_pair.first.PointerToRawData;
+			std::vector<uint8_t> new_sec_hdr(hdr_ptr, hdr_ptr + sizeof(image_sec_header));
+
+			auto sec_data_offset = hdr.PointerToRawData;
 			set_raw(sec_hdrs_offset, new_sec_hdr, new_raw);
-			set_raw(sec_data_offset, new_sec_data, new_raw);
+			set_raw(sec_data_offset, sec, new_raw);
 			sec_hdrs_offset += sizeof(image_sec_header);
 		}
+
+		this->raw_ = new_raw;
+		refresh(raw_);
 
 
 		//*dos = hdr_dos_;

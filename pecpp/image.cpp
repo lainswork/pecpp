@@ -156,7 +156,7 @@ namespace pecpp
 
 	void Image::refresh(std::vector<uint8_t>& new_raw)
 	{
-		const std::lock_guard<std::mutex> lock(this_mtx_);
+		
 		auto other = std::move(Image(new_raw));
 		*this = other;
 	}
