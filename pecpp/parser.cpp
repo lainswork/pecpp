@@ -89,6 +89,13 @@ namespace pecpp
 		return secs;
 	}
 
+	std::vector<uint8_t> Parser::get_overlay(std::vector<uint8_t>& image)
+	{
+		auto sec_hdrs = get_sec_hdrs(image);
+		auto last_sec_end_offset = sec_hdrs[-1].PointerToRawData + sec_hdrs[-1].SizeOfRawData;
+		std::vector<uint8_t> overlay(image.begin() + last_sec_end_offset, image.end()); // TODO Make this safer
+	}
+
 	sec_map Parser::get_sec_map(std::vector<uint8_t>& data)
 	{
 		auto sec_hdrs = get_sec_hdrs(data);
@@ -107,6 +114,14 @@ namespace pecpp
 		}
 
 		return map;
+	}
+
+	bool Parser::overlay_present(std::vector<uint8_t>& image)
+	{
+		auto sec_hdrs = get_sec_hdrs(image);
+		auto last_sec_end_offset = sec_hdrs[-1].PointerToRawData + sec_hdrs[-1].SizeOfRawData;
+		if (last_sec_end_offset <= image.size()) return false; // TODO Sanity check this
+		return true;
 	}
 
 	size_t Parser::get_sec_hdrs_size(std::vector<uint8_t>& image)

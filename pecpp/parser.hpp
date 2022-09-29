@@ -11,11 +11,16 @@ namespace pecpp
 		static image_opt_header* get_opt(std::vector<uint8_t>& image);
 		static image_file_header* get_fh(std::vector<uint8_t>& image);
 		static image_sec_header* get_sec_hdr(std::string& name, std::vector<uint8_t>& image);
+
 		static std::vector<image_sec_header> get_sec_hdrs(std::vector<uint8_t>& image);
 		static std::vector<std::vector<uint8_t>>  get_secs(std::vector<uint8_t>& image);
-		static sec_map get_sec_map(std::vector<uint8_t>& image);
-		static size_t get_sec_hdrs_size(std::vector<uint8_t>& image);
+		static std::vector<uint8_t> get_overlay(std::vector<uint8_t>& image);
 
+		static sec_map get_sec_map(std::vector<uint8_t>& image);
+
+		static bool overlay_present(std::vector<uint8_t>& image);
+
+		static size_t get_sec_hdrs_size(std::vector<uint8_t>& image);
 		static size_t get_dos_offset(std::vector<uint8_t>& image);
 		static size_t get_nth_offset(std::vector<uint8_t>& image);
 		static size_t get_fh_offset(std::vector<uint8_t>& image);
