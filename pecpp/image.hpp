@@ -50,9 +50,12 @@ namespace pecpp
 
 	private:
 		image_dos_header hdr_dos_;
+		std::vector<uint8_t> dos_stub_;
+		
 		image_nt_headers hdr_nt_;
 		image_opt_header hdr_opt_;
 		image_file_header hdr_file_;
+
 		sec_map secs_;
 
 		mutable std::mutex this_mtx_;

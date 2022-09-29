@@ -94,6 +94,27 @@ namespace pecpp
 		auto sec_hdrs = get_sec_hdrs(image);
 		auto last_sec_end_offset = sec_hdrs[-1].PointerToRawData + sec_hdrs[-1].SizeOfRawData;
 		std::vector<uint8_t> overlay(image.begin() + last_sec_end_offset, image.end()); // TODO Make this safer
+		return overlay;
+	}
+
+	std::vector<uint8_t> Parser::get_dos_stub(std::vector<uint8_t>& image)
+	{
+		auto dos = get_dos(image);
+		auto nth = get_nth(image);
+		auto size = 0x40; // Not so sure its a great idea to hard code this
+		auto stub_ptr = image.begin() + sizeof(image_dos_header);
+		std::vector<uint8_t> stub(stub_ptr, stub_ptr + size);
+		return stub;
+	}
+
+	std::vector<uint8_t> Parser::get_rich(std::vector<uint8_t>& image)
+	{
+		auto stub = get_dos_stub(image);
+		auto dos = get_dos(image);
+		auto rich_size = dos->e_lfanew - stub.size();
+		auto start = image.begin() + sizeof(image_dos_header) + 0x40;
+		std::vector<uint8_t> rich(start, start + rich_size);
+		return rich;
 	}
 
 	sec_map Parser::get_sec_map(std::vector<uint8_t>& data)

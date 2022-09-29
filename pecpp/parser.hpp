@@ -15,6 +15,8 @@ namespace pecpp
 		static std::vector<image_sec_header> get_sec_hdrs(std::vector<uint8_t>& image);
 		static std::vector<std::vector<uint8_t>>  get_secs(std::vector<uint8_t>& image);
 		static std::vector<uint8_t> get_overlay(std::vector<uint8_t>& image);
+		static std::vector<uint8_t> get_dos_stub(std::vector<uint8_t>& image);
+		static std::vector<uint8_t> get_rich(std::vector<uint8_t>& image);
 
 		static sec_map get_sec_map(std::vector<uint8_t>& image);
 
