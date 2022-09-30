@@ -65,7 +65,7 @@ namespace test
 						{
 							image.serialize();
 							std::string out = "./tmp.dll";
-							image.flush_raw_to_disk(out);
+							image.save(out);
 							auto new_data = helpers::file_to_bytes(out);
 							pecpp::Image new_image(new_data);
 						}

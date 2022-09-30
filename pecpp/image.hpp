@@ -44,7 +44,7 @@ namespace pecpp
 		void new_sec(std::string& name, uint32_t characteristics, std::vector<uint8_t>& new_data);
 
 		// file manipulation / flushing raw to Image
-		void flush_raw_to_disk(std::string& filepath);
+		void save(std::string& filepath);
 		void serialize(); // regenerate raw_ based on Image members (oh god)
 
 

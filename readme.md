@@ -15,11 +15,13 @@ There are several open source attempts at comprehensive PE/COFF parsing librarie
 
 The goal for this project is to leverage the best parts of these other projects along with modern C++ 20 to create a new parsing and manipulation library. Both of those components are things I'm learning along the way, so contributions, code reviews, and feature requests are very welcome.
 
-## Metrics
+## Examples
+
+### Parsing all DLLs in System32
 
 Pointing the parser / image wrapper at `C:\Windows\System32` makes for a decent pseudo-fuzz test:
 
-```
+```C++
 for (auto entry : fs::directory_iterator(sys32))
 {
   // get path, check extension, get vector of file bytes (omitted)
@@ -36,3 +38,22 @@ for (auto entry : fs::directory_iterator(sys32))
 ```
 
 On my machine, over 3000 `.dll`s are successfully parsed with no exceptions thrown.
+
+### Deserialization, modification and reserialization of a DLL
+
+```C++
+// Load file from disk into a byte vector
+auto data = helpers::file_to_bytes(file_name);
+
+// Create a new Image instance from the data
+pecpp::Image image(data);
+
+// Modify the image by adding a section
+image.new_sec(name, characteristics, new_data);
+
+// Regenerate the raw byte vector representation of the image
+image.serialize();
+
+// Write to disk
+image.save();
+```

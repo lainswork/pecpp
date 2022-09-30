@@ -3,7 +3,7 @@
 
 namespace pecpp
 {
-	void Image::flush_raw_to_disk(std::string& filepath)
+	void Image::save(std::string& filepath)
 	{
 		std::string backup_filepath = filepath + ".bak";
 		backup(backup_filepath);
