@@ -79,6 +79,7 @@ namespace pecpp
 			sec_hdrs_offset += sizeof(image_sec_header);
 		}
 
+		new_raw.insert(new_raw.end(), overlay_.begin(), overlay_.end());
 		this->raw_ = new_raw;
 		refresh(raw_);
 	}

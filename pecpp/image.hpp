@@ -16,6 +16,7 @@ namespace pecpp
 			, hdr_file_{ *Parser::get_fh(vec) }
 			, hdr_opt_{ *Parser::get_opt(vec) }
 			, secs_{ Parser::get_sec_map(vec) }
+			, overlay_{ Parser::get_overlay(vec) }
 		{};
 
 		Image& operator=(Image& other);
@@ -55,6 +56,7 @@ namespace pecpp
 		image_file_header hdr_file_;
 
 		sec_map secs_;
+		std::vector<uint8_t> overlay_;
 
 		mutable std::mutex this_mtx_;
 		std::vector<uint8_t> raw_;
