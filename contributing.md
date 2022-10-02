@@ -12,7 +12,7 @@ If you have an idea for a feature request, please create an issue with the `enha
 
 ## Code Reviews
 
-As this is a C++ hobby project, its highly likely that in the initial commits I've made at least a few grievous C++ mistakes. I am very welcome to any review of the code for security issues or otherwise. Please submit code reviews in the form of issues with the `code review` lavel.
+As this is a C++ hobby project, its highly likely that in the initial commits I've made at least a few grievous C++ mistakes. I am very welcome to any review of the code for security issues or otherwise. Please submit code reviews in the form of issues with the `code review` label.
 
 ## Pull Requests
 
