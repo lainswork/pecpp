@@ -6,6 +6,10 @@
 #include "pecpp.hpp"
 #include "image.hpp"
 
+#ifdef __MINGW32__
+#include <iterator>
+#endif
+
 namespace helpers
 {
 	std::vector<uint8_t> file_to_bytes(std::string const& filename)
