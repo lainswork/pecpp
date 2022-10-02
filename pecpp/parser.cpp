@@ -92,7 +92,8 @@ namespace pecpp
 	std::vector<uint8_t> Parser::get_overlay(std::vector<uint8_t>& image)
 	{
 		auto sec_hdrs = get_sec_hdrs(image);
-		auto last_sec_end_offset = sec_hdrs[-1].PointerToRawData + sec_hdrs[-1].SizeOfRawData;
+
+		auto last_sec_end_offset = sec_hdrs.back().PointerToRawData + sec_hdrs.back().SizeOfRawData;
 		std::vector<uint8_t> overlay(image.begin() + last_sec_end_offset, image.end()); // TODO Make this safer
 		return overlay;
 	}
