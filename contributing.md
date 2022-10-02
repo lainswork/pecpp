@@ -25,6 +25,13 @@ Any contributions you make will be under the MIT Software License. In short, whe
 1. Please create an issue with either the `bug` or `enhancement` labels (and any other labels that may apply) before creating a pull request (unless the issue is extremely minor, such as a typo in documentation).
 2. Please create a local branch with a descriptive name for all contributions. Please prefix all branch names with `fix` for bug fixes, `feat` for features and enhancements, `test` for testing change or additions, and `refactor` for code refactoring & cleanup.
 
+#### Style Guide
+
+- Capitalize class names (e.g. `Image`)
+- Use `snake_case` for variables and functions
+- Prefer smaller functions
+- Avoid raw pointers (especially `void *` and its ilk)
+
 ## Set-up Instructions
 
 This project uses Git, CMake, and C++20. Please make sure to have these installed before working on the code base.
