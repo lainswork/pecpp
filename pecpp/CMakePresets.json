@@ -34,6 +34,22 @@
       }
     },
     {
+      "name": "linux-mingw-base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "x86_64-w64-mingw32-gcc",
+        "CMAKE_CXX_COMPILER": "x86_64-w64-mingw32-g++"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
       "name": "x64-vc-debug",
       "displayName": "x64 Visual C++ Debug",
       "inherits": "windows-vc-base",
@@ -109,6 +125,46 @@
       "name": "x86-mingw-release",
       "displayName": "x86 MinGW Release",
       "inherits": "x86-mingw-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "x64-linux-mingw-debug",
+      "displayName": "x64 Linux MinGW Debug",
+      "inherits": "linux-mingw-base",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "x64-linux-mingw-release",
+      "displayName": "x64 Linux MinGW Release",
+      "inherits": "x64-linux-mingw-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "x86-linux-mingw-debug",
+      "displayName": "x86 Linux MinGW Debug",
+      "inherits": "linux-mingw-base",
+      "architecture": {
+        "value": "x86",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "x86-linux-mingw-release",
+      "displayName": "x86 Linux MinGW Release",
+      "inherits": "x86-linux-mingw-debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       }
