@@ -18,9 +18,11 @@ namespace pecpp
 			= std::runtime_error("Section not found");
 		inline static std::invalid_argument err_invalid_memory
 			= std::invalid_argument("Argument was nullptr");
-		inline static std::invalid_argument err_raw_assignment 
-			= std::invalid_argument("Assignment to raw PE data out of range");
+		inline static std::out_of_range err_raw_assignment 
+			= std::out_of_range("Assignment to raw PE data out of range");
 		inline static std::out_of_range err_sec_out_of_range
 			= std::out_of_range("Section data out of range of image data vector");
+		inline static std::out_of_range err_data_out_of_range_assignment
+			= std::out_of_range("Data assignment out of range");
 	};
 }
