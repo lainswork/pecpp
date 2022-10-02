@@ -92,6 +92,24 @@ namespace pecpp
 		}
 	}
 
+	void Image::set_sec_data(std::string& sec_name, size_t offset, std::vector<uint8_t> new_data)
+	{
+		const std::lock_guard<std::mutex> lock(this_mtx_);
+		for (auto pair : secs_)
+		{
+			if (!sec_name.compare((char*)pair.first.Name))
+			{
+				if (pair.second.size() < (new_data.size() + offset))
+					throw Error::err_data_out_of_range_assignment;
+				for (auto byte : new_data)
+				{
+					pair.second[offset] = byte;
+					offset++;
+				}				
+			}
+		}
+	}
+
 	// TODO test this
 	void Image::new_sec(std::string& name, uint32_t characteristics, std::vector<uint8_t>& new_data)
 	{
