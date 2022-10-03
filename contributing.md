@@ -23,7 +23,12 @@ Any contributions you make will be under the MIT Software License. In short, whe
 #### Rules
 
 1. Please create an issue with either the `bug` or `enhancement` labels (and any other labels that may apply) before creating a pull request (unless the issue is extremely minor, such as a typo in documentation).
-2. Please create a local branch with a descriptive name for all contributions. Please prefix all branch names with `fix` for bug fixes, `feat` for features and enhancements, `test` for testing change or additions, and `refactor` for code refactoring & cleanup.
+2. Please create a local branch with a descriptive name for all contributions. Please prefix all branch names with:
+    - `fix` for bug fixes, 
+    - `feat` for features and enhancements, 
+    - `test` for testing change or additions, 
+    - `refactor` for code refactoring & cleanup.
+    - `doc` for documentation related changes
 
 #### Style Guide
 
