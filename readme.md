@@ -34,10 +34,7 @@ for (auto entry : fs::directory_iterator(sys32))
     pecpp::Image image(data);
     images.push_back(std::move(image));
   }
-  catch (std::exception& e)
-  {
-    continue;
-  }
+  // ...
 }
 ```
 
@@ -61,3 +58,7 @@ image.serialize();
 // Write to disk
 image.save();
 ```
+
+## Building
+
+Please refer to the [build guide](https://github.com/joshfinley/pecpp/blob/main/building.md)
