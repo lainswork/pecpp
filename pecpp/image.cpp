@@ -55,6 +55,8 @@ namespace pecpp
 			if (!name.compare((char*)hdr.Name))
 				return hdr;
 		}
+
+		return image_sec_header{ 0 };
 	}
 
 	std::vector<uint8_t> Image::get_sec_data(std::string& name) const
@@ -67,6 +69,8 @@ namespace pecpp
 			if (!name.compare((char*)hdr.Name))
 				return sec.second;
 		}
+
+		return std::vector<uint8_t>();
 	}
 
 	sec_map Image::get_sec_map() const
